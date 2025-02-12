@@ -1,0 +1,54 @@
+simport { useState } from "react";
+
+export default function Cpeitel3App() {
+  const fullName = "MICHAEL LLOYD LAO - IT3A";
+  const expectations = "C-PEITEL3 EXPECTATIONS";
+  const zeroTalentSkills = [
+    "Being On Time",
+    "Making An Effort",
+    "Being High Energy",
+    "Having A Positive Attitude",
+    "Being Passionate",
+    "Using Good Body Language",
+    "Being Coachable",
+    "Doing A Little Extra",
+    "Being Prepared",
+    "Having A Strong Work Ethic",
+  ];
+
+  const [display, setDisplay] = useState(expectations);
+
+  const handleKeyPress = (key) => {
+    if (key >= 0 && key <= 9) {
+      setDisplay(zeroTalentSkills[key]);
+    } else if (key === "RESET") {
+      setDisplay("10 Things That Require Zero Talent");
+    } else if (key === "NAME") {
+      setDisplay(fullName.toUpperCase());
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center p-6 text-center">
+      <h1 className="text-2xl font-bold">{fullName}</h1>
+      <h2 className="text-xl mt-4">{display}</h2>
+      <div className="grid grid-cols-3 gap-2 mt-4">
+        {[...Array(10).keys()].map((num) => (
+          <button
+            key={num}
+            onClick={() => handleKeyPress(num)}
+            className="p-2 bg-blue-500 text-white rounded"
+          >
+            {num}
+          </button>
+        ))}
+      </div>
+      <button onClick={() => handleKeyPress("RESET")} className="mt-2 p-2 bg-red-500 text-white rounded">
+        RESET
+      </button>
+      <button onClick={() => handleKeyPress("NAME")} className="mt-2 p-2 bg-green-500 text-white rounded">
+        NAME
+      </button>
+    </div>
+  );
+}
